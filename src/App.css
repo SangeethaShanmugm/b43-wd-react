@@ -13,3 +13,18 @@
 .App>div:nth-child(2)>.profile-pic {
   border-radius: 0px;
 }
+
+.btn-like,
+.btn-dislike {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.btn-like {
+  margin-right: 0.5rem
+}
+
+.add-color {
+  display: flex;
+  align-items: center;
+}

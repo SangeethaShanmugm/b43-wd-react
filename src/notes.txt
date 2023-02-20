@@ -1,0 +1,16 @@
+hooks - function - useState
+
+//destructuring the useState 
+const [state, setState] =  useState(initialValue)
+
+
+const [like, setLike] = useState(0)
+like - current value
+setLike - you can update the like value
+
+
+the
+state - current scenario
+state of mind
+state of art of the technology
+
