@@ -1,6 +1,6 @@
 import { Counter } from "./Counter";
 
-function Welcome({ name, pic }) {
+export function Welcome({ name, pic }) {
   return (
     <div>
       <img
