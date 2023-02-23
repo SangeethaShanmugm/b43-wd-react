@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, Link, useNavigate, useParams } from "react-router-dom";
 import { Counter } from "./Counter";
 import { useState } from "react";
 import bookdata from "./data.json";
@@ -99,12 +99,19 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/books" element={<BookList />} />
+        <Route path="/books/:bookid" element={<BookDetails />} />
         <Route path="/add-color" element={<AddColor />} />
         <Route path="/user-profile" element={<UserList />} />
       </Routes>
     </div>
   );
   //JSX Ends
+}
+
+function BookDetails() {
+  const { bookid } = useParams();
+
+  return <div>Book Detail Page - {bookid}</div>;
 }
 
 function BookList() {
