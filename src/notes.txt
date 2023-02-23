@@ -85,5 +85,5 @@ useParams() - extract id from URL
 
 Task  -  20 mins
 //Add Book - like Add Color
-name, poster, rating, summary -  input field
+name, poster, rating, summary -  4 input field
 1 button - Add Book
