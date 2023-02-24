@@ -87,3 +87,24 @@ Task  -  20 mins
 //Add Book - like Add Color
 name, poster, rating, summary -  4 input field
 1 button - Add Book
+
+
+
+BookList(data) -> Book(data) -> Counter(data)
+               -> Contact(data)
+
+
+React flows in one direction - mountain to valley(unidirectional)
+
+Parent to child ✅
+Child to Parent ❌
+
+                 App(bookList, setBookList)
+
+
+      BookList          BookDetail           
+
+2/24/23 Task
+-------------
+  //Create a AddBook component
+  // path - /books/add    

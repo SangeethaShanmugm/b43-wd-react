@@ -68,3 +68,7 @@
   gap: 16px;
   margin-bottom: 24px
 }
+
+.book-detail-container {
+  max-width: 800px
+}

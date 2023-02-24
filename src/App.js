@@ -1,12 +1,12 @@
 import "./App.css";
-import { Routes, Route, Link, useNavigate, useParams } from "react-router-dom";
-import { Counter } from "./Counter";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import bookdata from "./data.json";
 import { AddColor } from "./AddColor";
 import { Home } from "./Home";
 import { UserList } from "./UserList";
-
+import { BookList } from "./BookList";
+import { BookDetails } from "./BookDetails";
 console.log(bookdata);
 
 console.log(bookdata[2].summary);
@@ -27,6 +27,7 @@ const INITIAL_BOOK_LIST = [
     rating: 7,
     summary:
       "Your subconscious mind is Link powerful force to be reckoned with. It makes up around 95% of your brain power and handles everything your body needs to function properly, from eating and breathing to digesting and making memories",
+    trailer: "https://www.youtube.com/embed/Solb9uA-tgQ",
   },
   {
     name: "Attitude is everything ",
@@ -74,7 +75,8 @@ const INITIAL_BOOK_LIST = [
 
 export default function App() {
   //JS starts
-
+  //Lifting the state up -> Lifted from child to parent
+  const [bookList, setBookList] = useState(INITIAL_BOOK_LIST);
   //JS Ends
   //JSX starts
   return (
@@ -98,124 +100,32 @@ export default function App() {
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/books" element={<BookList />} />
-        <Route path="/books/:bookid" element={<BookDetails />} />
+        <Route
+          path="/books"
+          element={<BookList bookList={bookList} setBookList={setBookList} />}
+        />
+        <Route
+          path="/books/:bookid"
+          element={<BookDetails bookList={bookList} />}
+        />
         <Route path="/add-color" element={<AddColor />} />
         <Route path="/user-profile" element={<UserList />} />
+        <Route path="/novel" element={<Navigate replace to="/books" />} />
+        <Route path="/404" element={<NotFoundPage />} />
+        <Route path="*" element={<Navigate replace to="/404" />} />
       </Routes>
     </div>
   );
   //JSX Ends
 }
 
-function BookDetails() {
-  const { bookid } = useParams();
-
-  return <div>Book Detail Page - {bookid}</div>;
-}
-
-function BookList() {
-  //const bookList = INITIAL_BOOK_LIST;
-  const [bookList, setBookList] = useState(INITIAL_BOOK_LIST);
-  const [name, setName] = useState("");
-  const [poster, setPoster] = useState("");
-  const [rating, setRating] = useState("");
-  const [summary, setSummary] = useState("");
-
+function NotFoundPage() {
   return (
     <div>
-      <div className="add-book-form">
-        <input
-          type="text"
-          onChange={(event) => setName(event.target.value)}
-          placeholder="Enter the name"
-        />
-        <input
-          type="text"
-          onChange={(event) => setPoster(event.target.value)}
-          placeholder="Enter the poster"
-        />
-        <input
-          type="text"
-          onChange={(event) => setRating(event.target.value)}
-          placeholder="Enter the rating"
-        />
-        <input
-          type="text"
-          onChange={(event) => setSummary(event.target.value)}
-          placeholder="Enter the summary"
-        />
-
-        <button
-          // copy the bookList and add newBook to it
-
-          onClick={() => {
-            const newBook = {
-              name: name,
-              poster: poster,
-              rating: rating,
-              summary: summary,
-            };
-
-            setBookList([...bookList, newBook]);
-          }}
-        >
-          Add Book
-        </button>
-      </div>
-
-      <div className="book-list">
-        {bookList.map((bk, index) => (
-          <Book key={index} book={bk} id={index} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function Book({ book, id }) {
-  // const book = {
-  //   name: "The Secret",
-  //   rating: 8,
-  //   poster:
-  //     "http://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781582701707/the-secret-9781582701707_lg.jpg",
-  //   summary:
-  //     "The Secret is Link self-help book by Rhonda Byrne that explains how the law of attraction, which states that positive energy attracts positive things into your life, governs your thinking and actions, and how you can use the power of positive thinking to achieve anything you can imagine",
-  // };
-
-  const [show, setShow] = useState(true);
-  //true = visible
-  //false -hidden
-  const styles = {
-    color: book.rating > 8 ? "green" : "red",
-  };
-
-  const summaryStyle = {
-    display: show ? "block" : "none",
-  };
-
-  const navigate = useNavigate();
-
-  return (
-    <div className="book-container">
-      <img className="book-poster" src={book.poster} alt={book.name} />
-      <div className="book-spec">
-        <h2 className="book-name">
-          {book.name} - {id}
-        </h2>
-        <p style={styles} className="book-rating">
-          ⭐{book.rating}
-        </p>
-      </div>
-      <button onClick={() => setShow(!show)}>Toggle description</button>
-      {/* /books/0 or /books/1 */}
-      <button onClick={() => navigate("/books/" + id)}>Info</button>
-      {/* <p style={summaryStyle} className="book-summary">
-        {book.summary}
-      </p> */}
-      {/* conditional rendering */}
-      {show ? <p className="book-summary">{book.summary}</p> : null}
-      <Counter />
+      <img
+        src="https://cdn.dribbble.com/users/469578/screenshots/2597126/404-drib23.gif"
+        alt="404 Not Found"
+      />
     </div>
   );
 }
