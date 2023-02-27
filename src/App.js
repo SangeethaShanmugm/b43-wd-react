@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import bookdata from "./data.json";
 import { AddColor } from "./AddColor";
@@ -7,6 +7,16 @@ import { Home } from "./Home";
 import { UserList } from "./UserList";
 import { BookList } from "./BookList";
 import { BookDetails } from "./BookDetails";
+import { NotFoundPage } from "./NotFoundPage";
+import { AddBook } from "./AddBook";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import Example from "./context/Example";
 console.log(bookdata);
 
 console.log(bookdata[2].summary);
@@ -74,21 +84,70 @@ const INITIAL_BOOK_LIST = [
 ];
 
 export default function App() {
-  //JS starts
+  //1. Creating - createContext  ✅
+  //2. Publisher - provider - context.provider ✅
+  // 3.Subscriber - useContext - useContext(context)
+
   //Lifting the state up -> Lifted from child to parent
   const [bookList, setBookList] = useState(INITIAL_BOOK_LIST);
-  //JS Ends
-  //JSX starts
+  const [mode, setMode] = useState("light");
+  const theme = createTheme({
+    palette: {
+      mode: mode,
+    },
+  });
+
+  const navigate = useNavigate();
   return (
-    <div className="App">
-      <nav>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div>
+        <AppBar position="static">
+          <Toolbar>
+            <Button color="inherit" onClick={() => navigate("/")}>
+              Home
+            </Button>
+            <Button color="inherit" onClick={() => navigate("/books")}>
+              BookList
+            </Button>
+            <Button color="inherit" onClick={() => navigate("/books/add")}>
+              AddBook
+            </Button>
+            <Button color="inherit" onClick={() => navigate("/add-color")}>
+              AddColor
+            </Button>
+            <Button color="inherit" onClick={() => navigate("/user-profile")}>
+              UserList
+            </Button>
+            <Button
+              color="inherit"
+              onClick={() => navigate("/context-example")}
+            >
+              Example
+            </Button>
+            <Button
+              startIcon={
+                mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />
+              }
+              color="inherit"
+              onClick={() => setMode(mode === "light" ? "dark" : "light")}
+            >
+              {mode === "light" ? "dark" : "light"} Mode
+            </Button>
+          </Toolbar>
+        </AppBar>
+
+        {/* <nav>
         <ul>
           <li>
-            {/* Link change page without refresh */}
+            //Link change page without refresh
             <Link to="/">Home</Link>
           </li>
           <li>
             <Link to="/books">BookList</Link>
+          </li>
+          <li>
+            <Link to="/books/add">AddBook</Link>
           </li>
           <li>
             <Link to="/add-color">AddColor</Link>
@@ -97,35 +156,31 @@ export default function App() {
             <Link to="/user-profile">UserList</Link>
           </li>
         </ul>
-      </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/books"
-          element={<BookList bookList={bookList} setBookList={setBookList} />}
-        />
-        <Route
-          path="/books/:bookid"
-          element={<BookDetails bookList={bookList} />}
-        />
-        <Route path="/add-color" element={<AddColor />} />
-        <Route path="/user-profile" element={<UserList />} />
-        <Route path="/novel" element={<Navigate replace to="/books" />} />
-        <Route path="/404" element={<NotFoundPage />} />
-        <Route path="*" element={<Navigate replace to="/404" />} />
-      </Routes>
-    </div>
-  );
-  //JSX Ends
-}
+      </nav> */}
 
-function NotFoundPage() {
-  return (
-    <div>
-      <img
-        src="https://cdn.dribbble.com/users/469578/screenshots/2597126/404-drib23.gif"
-        alt="404 Not Found"
-      />
-    </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/books"
+            element={<BookList bookList={bookList} setBookList={setBookList} />}
+          />
+          <Route
+            path="/books/:bookid"
+            element={<BookDetails bookList={bookList} />}
+          />
+          <Route
+            path="/books/add"
+            element={<AddBook bookList={bookList} setBookList={setBookList} />}
+          />
+
+          <Route path="/add-color" element={<AddColor />} />
+          <Route path="/user-profile" element={<UserList />} />
+          <Route path="/context-example" element={<Example />} />
+          <Route path="/novel" element={<Navigate replace to="/books" />} />
+          <Route path="/404" element={<NotFoundPage />} />
+          <Route path="*" element={<Navigate replace to="/404" />} />
+        </Routes>
+      </div>
+    </ThemeProvider>
   );
 }

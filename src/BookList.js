@@ -12,45 +12,6 @@ export function BookList({ bookList, setBookList }) {
 
   return (
     <div>
-      <div className="add-book-form">
-        <TextField
-          id="outlined-basic"
-          label="Name"
-          variant="outlined"
-          onChange={(event) => setName(event.target.value)} />
-        <TextField
-          id="outlined-basic"
-          label="Poster"
-          variant="outlined"
-          onChange={(event) => setPoster(event.target.value)} />
-        <TextField
-          id="outlined-basic"
-          label="Rating"
-          variant="outlined"
-          onChange={(event) => setRating(event.target.value)} />
-        <TextField
-          id="outlined-basic"
-          label="Summary"
-          variant="outlined"
-          onChange={(event) => setSummary(event.target.value)} />
-
-        <Button
-          variant="contained" // copy the bookList and add newBook to it
-          onClick={() => {
-            const newBook = {
-              name: name,
-              poster: poster,
-              rating: rating,
-              summary: summary,
-            };
-
-            setBookList([...bookList, newBook]);
-          }}
-        >
-          Add Book
-        </Button>
-      </div>
-
       <div className="book-list">
         {bookList.map((bk, index) => (
           <Book key={index} book={bk} id={index} />
