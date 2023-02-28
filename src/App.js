@@ -89,7 +89,7 @@ export default function App() {
   // 3.Subscriber - useContext - useContext(context)
 
   //Lifting the state up -> Lifted from child to parent
-  const [bookList, setBookList] = useState(INITIAL_BOOK_LIST);
+  const [bookList, setBookList] = useState([]);
   const [mode, setMode] = useState("light");
   const theme = createTheme({
     palette: {
@@ -98,6 +98,11 @@ export default function App() {
   });
 
   const navigate = useNavigate();
+
+  fetch("https://63fd8351c639f8563141f462.mockapi.io/books")
+    .then((response) => response.json())
+    .then((data) => setBookList(data));
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
