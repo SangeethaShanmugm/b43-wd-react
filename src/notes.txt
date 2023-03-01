@@ -110,3 +110,6 @@ Child to Parent ❌
   // path - /books/add    
 
   
+
+  //1args-callback func, 2 -dependency array
+  useEffect(() => {}, []);

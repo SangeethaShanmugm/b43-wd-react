@@ -1,13 +1,26 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-export function BookDetails({ bookList }) {
+export function BookDetails() {
   const { bookid } = useParams();
 
-  const book = bookList[bookid];
-  console.log(bookList, book);
+  // const book = bookList[bookid];
+  // console.log(bookList, book);
+
+  const [book, setBook] = useState({});
+
+  useEffect(() => {
+    fetch(`https://63fd8351c639f8563141f462.mockapi.io/books/${bookid}`, {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((bk) => setBook(bk));
+  }, []); // called only once
+
   const navigate = useNavigate();
+
   return (
     <div>
       <iframe
