@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { API } from "./global";
 export function BookDetails() {
   const { bookid } = useParams();
 
@@ -12,7 +13,7 @@ export function BookDetails() {
   const [book, setBook] = useState({});
 
   useEffect(() => {
-    fetch(`https://63fd8351c639f8563141f462.mockapi.io/books/${bookid}`, {
+    fetch(`${API}/books/${bookid}`, {
       method: "GET",
     })
       .then((response) => response.json())

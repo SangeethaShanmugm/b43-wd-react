@@ -6,7 +6,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { IconButton } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 
-export function Book({ book, id }) {
+export function Book({ book, id, deleteButton }) {
   // const book = {
   //   name: "The Secret",
   //   rating: 8,
@@ -64,6 +64,7 @@ export function Book({ book, id }) {
       {/* conditional rendering */}
       {show ? <p className="book-summary">{book.summary}</p> : null}
       <Counter />
+      {deleteButton}
     </div>
   );
 }
