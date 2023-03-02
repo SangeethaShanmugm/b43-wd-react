@@ -9,6 +9,7 @@ export function AddBook({ bookList, setBookList }) {
   const [poster, setPoster] = useState("");
   const [rating, setRating] = useState("");
   const [summary, setSummary] = useState("");
+  const [trailer, setTrailer] = useState("");
 
   const navigate = useNavigate();
 
@@ -39,6 +40,12 @@ export function AddBook({ bookList, setBookList }) {
           variant="outlined"
           onChange={(event) => setSummary(event.target.value)}
         />
+        <TextField
+          id="outlined-basic"
+          label="Trailer"
+          variant="outlined"
+          onChange={(event) => setTrailer(event.target.value)}
+        />
 
         <Button
           variant="contained" // copy the bookList and add newBook to it
@@ -48,6 +55,7 @@ export function AddBook({ bookList, setBookList }) {
               poster: poster,
               rating: rating,
               summary: summary,
+              trailer: trailer,
             };
             // 1. POST method ✅
             // 2. where will you give the data - body - data - JSON -> object => JSON ✅

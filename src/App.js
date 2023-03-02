@@ -17,6 +17,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Example from "./context/Example";
+import { EditBook } from "./EditBook";
 console.log(bookdata);
 
 console.log(bookdata[2].summary);
@@ -173,6 +174,7 @@ export default function App() {
             path="/books/add"
             element={<AddBook bookList={bookList} setBookList={setBookList} />}
           />
+          <Route path="/books/edit/:bookid" element={<EditBook />} />
 
           <Route path="/add-color" element={<AddColor />} />
           <Route path="/user-profile" element={<UserList />} />
@@ -185,3 +187,5 @@ export default function App() {
     </ThemeProvider>
   );
 }
+
+

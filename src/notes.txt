@@ -113,3 +113,10 @@ Child to Parent ❌
 
   //1args-callback func, 2 -dependency array
   useEffect(() => {}, []);
+
+
+
+Task  -15 mins
+---------------
+Edit Book -   PUT method
+BookDetail + AddBook
