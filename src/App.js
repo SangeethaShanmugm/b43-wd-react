@@ -170,12 +170,8 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/books" element={<BookList />} />
           <Route path="/books/:bookid" element={<BookDetails />} />
-          <Route
-            path="/books/add"
-            element={<AddBook bookList={bookList} setBookList={setBookList} />}
-          />
+          <Route path="/books/add" element={<AddBook />} />
           <Route path="/books/edit/:bookid" element={<EditBook />} />
-
           <Route path="/add-color" element={<AddColor />} />
           <Route path="/user-profile" element={<UserList />} />
           <Route path="/context-example" element={<Example />} />
@@ -187,5 +183,3 @@ export default function App() {
     </ThemeProvider>
   );
 }
-
-

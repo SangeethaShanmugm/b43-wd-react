@@ -73,20 +73,20 @@ function EditBookForm({ book }) {
         color="success"
         variant="contained" // copy the bookList and add newBook to it
         onClick={() => {
-          const newBook = {
+          const updatedBook = {
             name: name,
             poster: poster,
             rating: rating,
             summary: summary,
             trailer: trailer,
           };
-          // 1. POST method ✅
+          // 1. PUT method ✅
           // 2. where will you give the data - body - data - JSON -> object => JSON ✅
           // 3. Headers - we are passing only JSON data
 
-          fetch(`${API}/books`, {
-            method: "POST",
-            body: JSON.stringify(newBook),
+          fetch(`${API}/books/${book.id}`, {
+            method: "PUT",
+            body: JSON.stringify(updatedBook),
             headers: {
               "Content-Type": "application/json",
             },
