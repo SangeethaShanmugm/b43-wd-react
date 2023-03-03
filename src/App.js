@@ -18,6 +18,7 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Example from "./context/Example";
 import { EditBook } from "./EditBook";
+import { BasicForm } from "./BasicForm";
 console.log(bookdata);
 
 console.log(bookdata[2].summary);
@@ -133,6 +134,9 @@ export default function App() {
             >
               Example
             </Button>
+            <Button color="inherit" onClick={() => navigate("/form")}>
+              Basic Form
+            </Button>
             <Button
               startIcon={
                 mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />
@@ -175,6 +179,7 @@ export default function App() {
           <Route path="/add-color" element={<AddColor />} />
           <Route path="/user-profile" element={<UserList />} />
           <Route path="/context-example" element={<Example />} />
+          <Route path="/form" element={<BasicForm />} />
           <Route path="/novel" element={<Navigate replace to="/books" />} />
           <Route path="/404" element={<NotFoundPage />} />
           <Route path="*" element={<Navigate replace to="/404" />} />
@@ -183,3 +188,5 @@ export default function App() {
     </ThemeProvider>
   );
 }
+
+
