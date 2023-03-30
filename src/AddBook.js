@@ -60,7 +60,7 @@ export function AddBook() {
         "Content-Type": "application/json",
       },
     })
-      .then((data) => data.json())
+      // .then((data) => data.json())
       .then(() => navigate("/books"));
   };
 
